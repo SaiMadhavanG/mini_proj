@@ -19,6 +19,7 @@ import java.util.HashMap;
 public class SMGSeller extends Seller {
     public SMGSeller(String ID) {
         super(ID);
+        sellerID = ID;
         generateProducts();
     }
 
@@ -62,7 +63,7 @@ public class SMGSeller extends Seller {
 
         for (int i = 0; i < numOfProducts; i++) {
             LocalTime time = LocalTime.now();
-            String productID = "SMG_" + Integer.toString(1000 + i);
+            String productID = sellerID + "-" + Integer.toString(1000 + i);
             if (time.getNano() % 2 == 1) {
                 Category category = Category.Mobile;
                 String name = nameGenerator(category);
@@ -132,4 +133,5 @@ public class SMGSeller extends Seller {
     private Platform platform;
     private ArrayList<Product> productsList = new ArrayList<>();
     private HashMap<String, Product> productMap = new HashMap<>();
+    private String sellerID;
 }
