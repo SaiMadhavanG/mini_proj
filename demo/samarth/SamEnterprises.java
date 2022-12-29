@@ -60,7 +60,7 @@ public class SamEnterprises extends Seller {
             Integer Quantity=rand.nextInt(20);
             Integer Price=rand.nextInt(200,1000);
             //!check if this i works
-            Book book=new Book(Globals.Category.Book,cool_names.get(i),"SamEntrprises.Book."+i.toString(),Price,Quantity);
+            Book book=new Book(Globals.Category.Book,cool_names.get(i),"SamEntrprises-Book."+i.toString(),Price,Quantity);
             inventory.addBook(book);
         }
 
@@ -75,7 +75,7 @@ public class SamEnterprises extends Seller {
             Integer Price=rand.nextInt(20000,50000);
 
             //!Check if this i works latter.
-            Mobile mob=new Mobile(Globals.Category.Mobile,cool_names.get(i),"SamEntrprises.Mobile."+i,Price,Quantity);
+            Mobile mob=new Mobile(Globals.Category.Mobile,cool_names.get(i),"SamEntrprises-Mobile."+i,Price,Quantity);
             inventory.addMobile(mob);
         }
     }
