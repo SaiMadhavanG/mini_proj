@@ -1,8 +1,6 @@
 package demo.shashanklal;
 
-import ecomm.Seller;
 import ecomm.Platform;
-import ecomm.Portal;
 import ecomm.Product;
 import ecomm.Globals;
 import ecomm.Globals.Category;
@@ -13,74 +11,77 @@ import demo.Book;
 import demo.Mobile;
 
 public class shashanklalSeller extends ecomm.Seller {
-
-    // id is passed in by the class that instantiates sub-type of seller
     public shashanklalSeller(String id) {
         super(id);
-
+        generateproducts();
     }
 
-    generatproducts();
-
-    // ID of seller.
     public String getID() {
         return myID;
     }
 
-    publthePlatform.addSeller(this);}thePlatform){
-
-    One){
-
-    ArrayList<Product> listofproduct = new ArrayList<Product>();for(
-    int i = 0;i<products.size();i++)
-    {
-        if (products[i].getCategory() == whichOne) {
-            listofproduct.add(products[i]);
-        }
-    }return listofproduct;
+    public void addPlatform(Platform platform) {
+        this.platform = platform;
     }
 
-    n buyProduct(String productID, int quantity) {
+    public ArrayList<Product> findProducts(Globals.Category whichOne) {
+        ArrayList<Product> listofproduct = new ArrayList<Product>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getCategory() == whichOne) {
+                listofproduct.add(products.get(i));
+            }
+        }
+        return listofproduct;
+    }
 
-            for (int i = 0; i < products.size(); i++)
-        {
-            
-            y)
+    public boolean buyProduct(String productID, int quantity) {
 
-                {                
-                                if (products[i].getproductID() == productID)
-                        
-                    
-                                    if (products[i]
-                    .getuantity() >= quantity) {
-                    if (products[].getCategory() = Category.Mobile) {
-                 
-                      Mobile mb = Mobile(products[i]);
-                     e
-                  mbrn false;.reduceQuantity(quantity);
-                        } else {
-         
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductID() == productID) {
+                if (products.get(i).getQuantity() >= quantity) {
+                    if (products.get(i).getCategory() == Category.Mobile) {
+                        Mobile mb = (Mobile) products.get(i);
+                        mb.reduceQuantity(quantity);
+                    } else {
+                        Book b = (Book) products.get(i);
+                        b.reduceQuantity(quantity);
+                    }
+                    return true;
+                } else
+                    return false;
+            }
+        }
+        return false;
     }
 
     private void generateproducts() {
         random.setSeed(LocalTime.now().getNano());
-        int numberofproducts = random.nextInt(2, 100);
-        for (int i = 0; i <= numberofproducts; i++) {
+        int numberofproducts = random.nextInt(3, 100);
+        for (int i = 0; i < numberofproducts; i++) {
             if (i % 2 == 0) {
-                int quantity = rand.nextInt(1, 100);
-                float price = rand.nextInt(2, 6) * 10000.0;
-                String name = nameofmobiles.get(rand.nextInt(8));
-                String productID="shashanklal_"+Integer.toString(rand.nextInt(1000))
+                int quantity = random.nextInt(1, 100);
+                float price = random.nextInt(2, 6) * 10000.0f;
+                String name = nameofmobiles[random.nextInt(8)];
+                String productID = "shashanklal_" + Integer.toString(i + 1000);
+                Mobile mb = new Mobile(Category.Mobile, name, productID, price, quantity);
+                products.add(mb);
+            } else {
+                int quantity = random.nextInt(1, 100);
+                float price = random.nextInt(2, 9) * 100.0f;
+                String name = nameofbooks[random.nextInt(10)];
+                String productID = "shashanklal_" + Integer.toString(i + 1000);
+                Book b = new Book(Category.Book, name, productID, price, quantity);
+                products.add(b);
             }
         }
     }
 
-    Book b = Book(products[i]);
-    private Stri                        b.reduceQuantity(quantity);}
-
-    private String[] nameofmobiles = { "Tony", "Ramsung", "Pineapple", "Tivo", "Joppo", "PlusPlus", "Mixel",
-            "Thor" };}}else return false;}}return false;}
-
+    private String[] nameofmobiles = { "Tony", "Ramsung", "Pineapple", "Tivo", "Joppo", "PlusPlus", "Mixel", "Thor" };
+    private String[] nameofbooks = { "Aroundtheworld", "MerchantOfVenice", "War and Peace", "Ikigai", "Invisible Man",
+            "Time Travel", "Macbeth", "TheAlchemist", "WillyWonka", "Sapiens" };
     private String myID;
     private ArrayList<Product> products = new ArrayList<Product>();
+    private Random random = new Random();
+    private Platform platform;
+
 }

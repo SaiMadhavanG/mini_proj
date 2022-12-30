@@ -2,6 +2,7 @@ package demo;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.NoSuchFileException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,47 +42,54 @@ public class DemoPlatform extends Platform {
 	@Override
 	public void processRequests() {
 
-		String request = sc.nextLine();
-		String[] requestArray = request.split("\\s");
-		String portalID = requestArray[0];
-		String requestID = requestArray[1];
-		try {
-			if (requestArray[2].equals("Start")) {
-				fw.write(portalID + " " + requestID + " ");
-				for (Globals.Category category : Globals.Category.values()) {
-					fw.write(new Globals().getCategoryName(category) + " ");
-				}
-				fw.write('\n');
-			} else if (requestArray[2].equals("List")) {
-				String category = requestArray[3];
-				ArrayList<Product> products = new ArrayList<>();
-				if (category.equals("Mobile")) {
-					for (Seller seller : sellerList) {
-						products.addAll(seller.findProducts(Category.Mobile));
+		String request;
+		while (true) {
+			try {
+				request = sc.nextLine();
+				if (request.equals(""))
+					continue;
+				String[] requestArray = request.split("\\s");
+				String portalID = requestArray[0];
+				String requestID = requestArray[1];
+				if (requestArray[2].equals("Start")) {
+					fw.write(portalID + " " + requestID + " ");
+					for (Globals.Category category : Globals.Category.values()) {
+						fw.write(new Globals().getCategoryName(category) + " ");
 					}
-				} else if (category.equals("Book")) {
-					for (Seller seller : sellerList) {
-						products.addAll(seller.findProducts(Category.Book));
+					fw.write('\n');
+				} else if (requestArray[2].equals("List")) {
+					String category = requestArray[3];
+					ArrayList<Product> products = new ArrayList<>();
+					if (category.equals("Mobile")) {
+						for (Seller seller : sellerList) {
+							products.addAll(seller.findProducts(Category.Mobile));
+						}
+					} else if (category.equals("Book")) {
+						for (Seller seller : sellerList) {
+							products.addAll(seller.findProducts(Category.Book));
+						}
 					}
-				}
-				for (Product product : products) {
-					fw.write(portalID + " " + requestID + " "
-							+ product.getName() + " " + product.getProductID()
-							+ " " + product.getPrice() + " " + product.getQuantity()
-							+ "\n");
-				}
-			} else if (requestArray[2].equals("Buy")) {
-				fw.write(portalID + " " + requestID);
-				String itemToBuy = requestArray[3];
-				Integer quantity = Integer.parseInt(requestArray[4]);
-				String SellerIdentity = itemToBuy.split("-")[0];
+					for (Product product : products) {
+						fw.write(portalID + " " + requestID + " "
+								+ product.getName() + " " + product.getProductID()
+								+ " " + product.getPrice() + " " + product.getQuantity()
+								+ "\n");
+					}
+				} else if (requestArray[2].equals("Buy")) {
+					fw.write(portalID + " " + requestID);
+					String itemToBuy = requestArray[3];
+					Integer quantity = Integer.parseInt(requestArray[4]);
+					String SellerIdentity = itemToBuy.split("-")[0];
 
-				Seller temp = sellerMap.get(SellerIdentity);
-				temp.buyProduct(itemToBuy, quantity);
-				fw.flush();
+					Seller temp = sellerMap.get(SellerIdentity);
+					temp.buyProduct(itemToBuy, quantity);
+					fw.flush();
+				}
+			} catch (NoSuchFileException e) {
+				break;
+			} catch (Exception e) {
+				System.out.println(e);
 			}
-		} catch (Exception e) {
-			System.out.println(e);
 		}
 	}
 
