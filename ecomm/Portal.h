@@ -17,17 +17,16 @@ class Portal
     // PortalID is unique to each instance of Portal
     // Each request from a portal should have a unique ID
 public:
-    virtual void processUserCommand(string command);
+    void processUserCommand(string command);
 
     // checks for pending responses (in PortalToPlatform)
     // Displays response
 public:
-    virtual void checkResponse();
-
+    void checkResponse();
 private:
-    static vector<Product> sortByParameter(vector<Products> productList, string Parameter);
-
-private:
-    static bool compare(Product p1, product p2);
-};
+    // static vector<Product> sortByParameter(vector<Product> productList, string Parameter);
+    int portalID;
+// private:
+//     static bool compare(Product p1, Product p2);
+// };
 #endif
