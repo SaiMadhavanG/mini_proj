@@ -120,11 +120,11 @@ void DemoPortal::checkResponse()
                         cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity()<<endl;
                     }
             }
-        }else{
+        }
+        }
+    }else{
              cout<<"empty response";
          }
-        }
-
         }
 }
 vector<string> DemoPortal::split(string s, string del){
