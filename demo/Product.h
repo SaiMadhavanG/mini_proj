@@ -12,8 +12,9 @@ private:
 
 public:
     Product();
-    Product();
+    Product(string, string, int, int);
     string getName();
+    int operator=(Product a);
     string getProductID();
     float getPrice();
     int getQuantity();

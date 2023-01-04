@@ -2,6 +2,8 @@
 #include "Portal.h"
 #include "DemoPortal.h"
 #include "Product.h"
+#include "Comparator.h"
+#include <algorithm>
 using namespace std;
 
 DemoPortal::DemoPortal(string portal_id)
@@ -81,7 +83,7 @@ void DemoPortal::checkResponse()
             if (portal_id == portalidcheck)
             {
                 Fileio >> requestidcheck;
-                nature = request_map[requestid];
+                nature = request_map[requestidcheck];
                 Fileio >> nextval;
                 if (nature == "Start")
                 {
@@ -108,7 +110,7 @@ void DemoPortal::checkResponse()
                         Fileio >> productid;
                         Fileio >> price;
                         Fileio >> quantity;
-                        Product temp = new Product(productname, productid, price, quantity);
+                        Product temp = *(new Product(productname, productid, price, quantity));
                         product_list.push_back(temp);
 
                         Fileio >> nextval;
@@ -117,12 +119,11 @@ void DemoPortal::checkResponse()
                     vector<Product> sorted_products;
                     if (nature == "Name")
                     {
-
-                        sorted_products = sort(product_list, SortByName);
+                        sorted_products = sort(product_list.begin(), product_list.end(), Comparator::SortByName);
                     }
                     else if (nature == "Price")
                     {
-                        sorted_products = sort(product_list, SortByPrice);
+                        sorted_products = sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
                     }
 
                     for (Product a : sorted_products)
