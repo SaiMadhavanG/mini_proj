@@ -64,6 +64,7 @@ void DemoPortal::checkResponse()
 {
 
 
+
     string response;
     vector<string> responses;
     string portalidcheck;
@@ -76,12 +77,15 @@ void DemoPortal::checkResponse()
     string  parameter;
     int price;
     int quantity;
+    string pref="";
 
     if (Fileio.is_open())
     {
+        while(true){
         getline(Fileio,response);
-        while(response!=""){
-
+        if(response==pref){
+            break;
+        }
         responses=split(response," ");
 
         portalidcheck=responses[0];
@@ -99,13 +103,15 @@ void DemoPortal::checkResponse()
             cout<<responses[2];
         }else{
             parameter=nature;
-            while(portalidcheck==portal_id){
+            while(requestidcheck==responses[1]){
             productname = responses[2];
             productid=response[3];
             price=response[3];
             quantity=response[3];
             Product temp = *(new Product(productname, productid, price, quantity));
             product_list.push_back(temp);
+            getline(Fileio,response);
+
             }
             if (nature == "Name")
             {
@@ -125,9 +131,12 @@ void DemoPortal::checkResponse()
 
         }
         getline(Fileio,response);
+        pref=response;
         }
 
         }
+
+
 
 
         }
