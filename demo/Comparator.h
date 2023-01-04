@@ -3,13 +3,14 @@
 #define COMPARATOR_H
 #include<bits/stdc++.h>
 #include"Product.h"
+#include<string>
 class Comparator
 {
     private:
         string typeofcomp;
         string type;
     public:
-        static bool SortByPrice(Product* p1,Product* p2);
-        static bool SortByName(Product* t1,Product* t2);
+        static bool SortByPrice(Product p1,Product p2);
+        static bool SortByName(Product t1,Product t2);
 };
 #endif
