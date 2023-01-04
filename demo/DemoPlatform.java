@@ -19,7 +19,6 @@ public class DemoPlatform extends Platform {
 		try {
 			readFile.createNewFile();
 			fr = new FileReader(readFile);
-			sc = new Scanner(fr);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -41,11 +40,14 @@ public class DemoPlatform extends Platform {
 
 	@Override
 	public void processRequests() {
+		sc = new Scanner(fr);
 
 		String request;
 		while (true) {
 			try {
 				request = sc.nextLine();
+				if (request.equals(""))
+					request = sc.nextLine();
 				if (request.equals(""))
 					continue;
 				String[] requestArray = request.split("\\s");

@@ -33,9 +33,9 @@ public class PlatformMain {
 		s1.addPlatform(pf);
 		pf.addSeller(s2);
 
-		// Seller s3 = new SMGSeller("SMGSeller");
-		// s1.addPlatform(pf);
-		// pf.addSeller(s3);
+		Seller s3 = new SMGSeller("SMGSeller");
+		s1.addPlatform(pf);
+		pf.addSeller(s3);
 
 		System.out.println(listOfCommands);
 		Scanner sc = new Scanner(System.in);

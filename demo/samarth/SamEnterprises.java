@@ -71,7 +71,7 @@ public class SamEnterprises extends Seller// class SamEnterprises is the child c
                         "Kindler 6",
                         "Redemption 7", "Sherman 4", "Sherman 14", "Lynx 17", "Kanishnokov AK47" }));
         for (Integer i = 0; i < cool_names.size(); i++) {
-            Integer Quantity = rand.nextInt(20);
+            Integer Quantity = rand.nextInt(5);
             Integer Price = rand.nextInt(200, 1000);
             // !check if this i works
             // Creating an object of the Book class and adding it to the inventory
@@ -89,7 +89,7 @@ public class SamEnterprises extends Seller// class SamEnterprises is the child c
                 List.of(new String[] { "Syphon 7", "Syphon 9", "Kindler 5", "Kindler 6",
                         "Redemption 7", "Sherman 4", "Sherman 14", "Lynx 17", "Kanishnokov AK47" }));
         for (Integer i = 0; i < cool_names.size(); i++) {
-            Integer Quantity = rand.nextInt(20);
+            Integer Quantity = rand.nextInt(5);
             Integer Price = rand.nextInt(20000, 50000);
 
             // !Check if this i works latter.

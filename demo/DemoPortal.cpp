@@ -63,7 +63,6 @@ void DemoPortal::processUserCommand(string command)
 void DemoPortal::checkResponse()
 {
 
-
     string response;
     vector<string> responses;
     string portalidcheck;
@@ -73,68 +72,80 @@ void DemoPortal::checkResponse()
     vector<Product> product_list;
     string productname;
     string productid;
-    string  parameter;
+    string parameter;
     int price;
     int quantity;
 
     if (Fileio.is_open())
     {
-        getline(Fileio,response);
-        if(response!="")){
-        responses=split(response," ");
- 
-        portalidcheck=responses[0];
-        requestidcheck=responses[1];
-        nextval=responses[2];
-        nature=request_map[requestidcheck];
-        if(nature=="Start"){
-            cout<<"Here are the products we offer right now"<<endl;
-            for(int i=2;i<responses.size();i++){
-                cout<<responses[i];
-            }
-            cout<<endl;
-        }else if(nature=="Buy"){
-            cout<<"Here is result of your Transactions"<<endl;
-            cout<<responses[2];
-        }else{
-            parameter=nature;
-            while(portalidcheck==portal_id){
-            productname = responses[2];
-            productid=response[3];
-            price=response[3];
-            quantity=response[3];
-            Product temp = *(new Product(productname, productid, price, quantity));
-            product_list.push_back(temp);
+        getline(Fileio, response);
+        if (response != "")
+        {
+            responses = split(response, " ");
 
-            if (nature == "Name")
+            portalidcheck = responses[0];
+            requestidcheck = responses[1];
+            nextval = responses[2];
+            nature = request_map[requestidcheck];
+            if (nature == "Start")
             {
-                sort(product_list.begin(), product_list.end(), Comparator::SortByName);
-            }
-                else if (nature == "Price")
+                cout << "Here are the products we offer right now" << endl;
+                for (int i = 2; i < responses.size(); i++)
                 {
-                    sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
+                    cout << responses[i];
                 }
-                cout<<"Here are your products sorted by "<<parameter<<endl;
-                    for (Product a : product_list)
+                cout << endl;
+            }
+            else if (nature == "Buy")
+            {
+                cout << "Here is result of your Transactions" << endl;
+                cout << responses[2];
+            }
+            else
+            {
+                parameter = nature;
+                while (portalidcheck == portal_id)
+                {
+                    productname = responses[2];
+                    productid = response[3];
+                    price = response[3];
+                    quantity = response[3];
+                    Product temp = *(new Product(productname, productid, price, quantity));
+                    product_list.push_back(temp);
+
+                    if (nature == "Name")
                     {
-                        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity()<<endl;
+                        sort(product_list.begin(), product_list.end(), Comparator::SortByName);
                     }
+                    else if (nature == "Price")
+                    {
+                        sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
+                    }
+                }
             }
         }
-        }
-    }else{
-             cout<<"empty response";
-         }
-        }
+    }
+    else
+    {
+        cout << "empty response";
+    }
+    cout << "Here are your products sorted by " << parameter << endl;
+    for (Product a : product_list)
+    {
+        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity() << endl;
+    }
 }
-vector<string> DemoPortal::split(string s, string del){
-            vector<string> temp;
-            int start, end = -1*del.size();
-            do {
-                start = end + del.size();
-                end = s.find(del, start);
-                temp.push_back(s.substr(start, end - start));
-            } while (end != -1);
-    
+
+vector<string> DemoPortal::split(string s, string del)
+{
+    vector<string> temp;
+    int start, end = -1 * del.size();
+    do
+    {
+        start = end + del.size();
+        end = s.find(del, start);
+        temp.push_back(s.substr(start, end - start));
+    } while (end != -1);
+
     return temp;
-        }
+}
