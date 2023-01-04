@@ -1,31 +1,36 @@
 package demo;
-
+//Importing the globals and product pacakges
 import ecomm.Globals;
 import ecomm.Product;
 
-public class Book extends Product {
-    public Book(Globals.Category category, String name, String productID, float price, int quantity) {
+public class Book extends Product//Here Book is the child class of Product
+{
+    public Book(Globals.Category category, String name, String productID, float price, int quantity)//Parametrised constructor
+    {
+        //Initialisation of the data members
         this.category = category;
         this.name = name;
         this.productID = productID;
         this.price = price;
         this.quantity = quantity;
     }
-
-    public int reduceQuantity(int reduction) {
+    //This function will reduce quantity for the product requested by the user
+    public void reduceQuantity(int reduction) {
         quantity = quantity - reduction;
-        return quantity;
+        // return quantity;
     }
 
-    public Book() {
+    public Book()//Default constructor
+    {
         this.name = "_empty_name";
         this.productID = "_null_productID";
         this.price = 0.0f;
         this.quantity = 0;
 
     }
-
-    public Globals.Category getCategory() {
+    //Getter functions to get Category,Name,productID,Price and quantity respectively
+    public Globals.Category getCategory()
+    {
         return category;
     }
 
@@ -44,7 +49,7 @@ public class Book extends Product {
     public int getQuantity() {
         return quantity;
     }
-
+//Data members of the class Book
     private Globals.Category category;
     private String name;
     private String productID;
