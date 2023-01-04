@@ -63,6 +63,7 @@ void DemoPortal::processUserCommand(string command)
 void DemoPortal::checkResponse()
 {
 
+
     string response;
     vector<string> responses;
     string portalidcheck;
@@ -72,37 +73,31 @@ void DemoPortal::checkResponse()
     vector<Product> product_list;
     string productname;
     string productid;
-    string parameter;
+    string  parameter;
     int price;
     int quantity;
 
     if (Fileio.is_open())
     {
-        getline(Fileio, response);
-        if (response != "")
-        {
-            responses = split(response, " ");
+        getline(Fileio,response);
+        while(response!=""){
 
-            portalidcheck = responses[0];
-            requestidcheck = responses[1];
-            nextval = responses[2];
-            nature = request_map[requestidcheck];
-            if (nature == "Start")
-            {
-                cout << "Here are the products we offer right now" << endl;
-                for (int i = 2; i < responses.size(); i++)
-                {
-                    cout << responses[i];
-                }
-                cout << endl;
+        responses=split(response," ");
+
+        portalidcheck=responses[0];
+        requestidcheck=responses[1];
+        nextval=responses[2];
+        nature=request_map[requestidcheck];
+        if(nature=="Start"){
+            cout<<"Here are the products we offer right now"<<endl;
+            for(int i=2;i<responses.size();i++){
+                cout<<responses[i];
             }
-            else if (nature == "Buy")
-            {
-                cout << "Here is result of your Transactions" << endl;
-                cout << responses[2];
-            }
-            else
-            {
+            cout<<endl;
+        }else if(nature=="Buy"){
+            cout<<"Here is result of your Transactions"<<endl;
+            cout<<responses[2];
+        }else{
             parameter=nature;
             while(portalidcheck==portal_id){
             productname = responses[2];
@@ -129,27 +124,22 @@ void DemoPortal::checkResponse()
 
 
         }
+        getline(Fileio,response);
         }
-    }
-}
-else
-{
-    cout << "empty response";
-}
 
-}
-}
+        }
 
-vector<string> DemoPortal::split(string s, string del)
-{
-    vector<string> temp;
-    int start, end = -1 * del.size();
-    do
-    {
-        start = end + del.size();
-        end = s.find(del, start);
-        temp.push_back(s.substr(start, end - start));
-    } while (end != -1);
+
+        }
+
+vector<string> DemoPortal::split(string s, string del){
+            vector<string> temp;
+            int start, end = -1*del.size();
+            do {
+                start = end + del.size();
+                end = s.find(del, start);
+                temp.push_back(s.substr(start, end - start));
+            } while (end != -1);
 
     return temp;
-}
+        }
