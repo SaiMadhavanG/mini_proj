@@ -8,7 +8,7 @@ using namespace std;
 class Portal
 {
 public:
-    Portal();
+    Portal(){}
 
     // Invoked by main or driver class
     // sends command to Platform (by writing to PortalToPlatform)
