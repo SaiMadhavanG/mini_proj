@@ -124,7 +124,7 @@ void DemoPortal::checkResponse()
 
         }
 }
-vector<string> split(string s, string del = " "){
+vector<string> DemoPortal::split(string s, string del = " "){
             vector<string> temp;
             int start, end = -1*del.size();
             do {
