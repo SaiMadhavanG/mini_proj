@@ -106,34 +106,22 @@ void DemoPortal::checkResponse()
                 parameter = nature;
                 while (portalidcheck == portal_id)
                 {
-                    productname = responses[2];
-                    productid = response[3];
-                    price = response[3];
-                    quantity = response[3];
-                    Product temp = *(new Product(productname, productid, price, quantity));
-                    product_list.push_back(temp);
-
-                    if (nature == "Name")
-                    {
-                        sort(product_list.begin(), product_list.end(), Comparator::SortByName);
-                    }
-                    else if (nature == "Price")
-                    {
-                        sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
-                    }
+                    sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
                 }
             }
         }
     }
-    else
-    {
-        cout << "empty response";
-    }
-    cout << "Here are your products sorted by " << parameter << endl;
-    for (Product a : product_list)
-    {
-        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity() << endl;
-    }
+}
+else
+{
+    cout << "empty response";
+}
+cout << "Here are your products sorted by " << parameter << endl;
+for (Product a : product_list)
+{
+    cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity() << endl;
+}
+}
 }
 
 vector<string> DemoPortal::split(string s, string del)
