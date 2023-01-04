@@ -1,12 +1,19 @@
-#include<bits/stdc++.h>
-#include"Product.h"
+#include <bits/stdc++.h>
+#include "Product.h"
 using namespace std;
 Product::Product()
 {
-    Name=" ";
-    productID=" ";
-    price=0;
-    quantity=0;
+    Name = " ";
+    productID = " ";
+    price = 0;
+    quantity = 0;
+}
+Product::Product(string name, string productid, int pri, int q)
+{
+    Name = name;
+    productID = productid;
+    price = pri;
+    quantity = q;
 }
 string Product::getName()
 {

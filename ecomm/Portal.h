@@ -7,7 +7,7 @@
 using namespace std;
 class Portal
 {
-
+public:
     Portal();
 
     // Invoked by main or driver class
@@ -16,17 +16,10 @@ class Portal
     // and a RequestID as second token.
     // PortalID is unique to each instance of Portal
     // Each request from a portal should have a unique ID
-public:
-    void processUserCommand(string command);
+    virtual void processUserCommand(string) = 0;
 
     // checks for pending responses (in PortalToPlatform)
     // Displays response
-public:
-    void checkResponse();
-private:
-    // static vector<Product> sortByParameter(vector<Product> productList, string Parameter);
-    int portalID;
-// private:
-//     static bool compare(Product p1, Product p2);
-// };
+    virtual void checkResponse() = 0;
+};
 #endif

@@ -1,31 +1,24 @@
 #ifndef DEMO_PORTAL_H
 #define DEMO_PORTAL_H
-#include "Portal.cpp"
+#include "Portal.h"
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <map>
+using namespace std;
 
 class DemoPortal : public Portal
 {
 
-    DemoPortal()
-    {
-        Fileio.open("PlatformToPortal.txt")
-    }
-
 public:
+    DemoPortal(string);
     void processUserCommand(string command);
-
-public:
     void checkResponse();
-
-public:
-    static void main()
-    {
-        // TODO Auto-generated method stub
-    }
+    static int req_no;
 
 private:
     ifstream Fileio;
-}
+    string portal_id;
+    map<string, string> request_map;
+};
 #endif
