@@ -62,6 +62,10 @@ void DemoPortal::processUserCommand(string command)
 }
 void DemoPortal::checkResponse()
 {
+
+
+    string response;
+    vector<string> responses;
     string portalidcheck;
     string requestidcheck;
     string nature;
@@ -69,69 +73,63 @@ void DemoPortal::checkResponse()
     vector<Product> product_list;
     string productname;
     string productid;
+    string  parameter;
     int price;
     int quantity;
 
     if (Fileio.is_open())
     {
+        getline(Fileio,response);
+        responses=split(response);
+        portalidcheck=responses[0];
+        requestidcheck=responses[1];
+        nextval=responses[2];
+        nature=request_map[requestidcheck];
+        if(nature=="Start"){
+            cout<<"Here are the products we offer right now"<<endl;
+            for(int i=2;i<responses.size();i++){
+                cout<<responses[i];
+            }
+            cout<<endl;
+        }else if(nature=="Buy"){
+            cout<<"Here is result of your Transactions"<<endl;
+            cout<<responses[2];
+        }else if(nature=="List"){
 
-        Fileio >> portalidcheck;
+        }else{
+            parameter=nature;
+            while(portalidcheck==portal_id){
+            productname = responses[2];
+            productid=response[3];
+            price=response[3];
+            quantity=response[3];
+            Product temp = *(new Product(productname, productid, price, quantity));
+            product_list.push_back(temp);
 
-        while (!portalidcheck.empty())
-        {
-            if (portal_id == portalidcheck)
+            if (nature == "Name")
             {
-                Fileio >> requestidcheck;
-                nature = request_map[requestidcheck];
-                Fileio >> nextval;
-                if (nature == "Start")
+                sort(product_list.begin(), product_list.end(), Comparator::SortByName);
+            }
+                else if (nature == "Price")
                 {
-                    while (nextval != portal_id)
-                    {
-                        cout << nextval << endl;
-
-                        Fileio >> nextval;
-                    }
-                    portalidcheck = nextval;
-                    continue;
+                    sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
                 }
-                else if (nature == "Buy")
-                {
-                    cout << nextval;
-                    Fileio >> portalidcheck;
-                    continue;
-                }
-                else
-                {
-                    while (nextval != portal_id)
-                    {
-                        productname = nextval;
-                        Fileio >> productid;
-                        Fileio >> price;
-                        Fileio >> quantity;
-                        Product temp = *(new Product(productname, productid, price, quantity));
-                        product_list.push_back(temp);
-
-                        Fileio >> nextval;
-                    }
-
-                    if (nature == "Name")
-                    {
-                        sort(product_list.begin(), product_list.end(), Comparator::SortByName);
-                    }
-                    else if (nature == "Price")
-                    {
-                        sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
-                    }
-
+                cout<<"Here are your products sorted by "<<parameter<<endl;
                     for (Product a : product_list)
                     {
-                        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity();
+                        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity()<<endl;
                     }
-                    portalidcheck = nextval;
-                    continue;
-                }
             }
         }
-    }
+
+        }
 }
+vector<string> split(string s, string del = " "){
+            vector<string> temp;
+            int start, end = -1*del.size();
+            do {
+                start = end + del.size();
+                end = s.find(del, start);
+                temp.push_back(s.substr(start, end - start));
+            } while (end != -1);
+        }
