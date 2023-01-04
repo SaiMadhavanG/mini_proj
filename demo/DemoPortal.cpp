@@ -80,7 +80,7 @@ void DemoPortal::checkResponse()
     if (Fileio.is_open())
     {
         getline(Fileio,response);
-        if(!response.equals("")){
+        if(response!="")){
         responses=split(response," ");
  
         portalidcheck=responses[0];
