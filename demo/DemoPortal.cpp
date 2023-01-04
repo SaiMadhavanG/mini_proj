@@ -80,7 +80,9 @@ void DemoPortal::checkResponse()
     if (Fileio.is_open())
     {
         getline(Fileio,response);
+        if(!response.equals("")){
         responses=split(response," ");
+ 
         portalidcheck=responses[0];
         requestidcheck=responses[1];
         nextval=responses[2];
@@ -118,6 +120,9 @@ void DemoPortal::checkResponse()
                         cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity()<<endl;
                     }
             }
+        }else{
+             cout<<"empty response";
+         }
         }
 
         }
