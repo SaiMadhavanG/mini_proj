@@ -80,7 +80,7 @@ void DemoPortal::checkResponse()
     if (Fileio.is_open())
     {
         getline(Fileio,response);
-        responses=split(response);
+        responses=split(response," ");
         portalidcheck=responses[0];
         requestidcheck=responses[1];
         nextval=responses[2];
@@ -124,7 +124,7 @@ void DemoPortal::checkResponse()
 
         }
 }
-vector<string> DemoPortal::split(string s, string del = " "){
+vector<string> DemoPortal::split(string s, string del){
             vector<string> temp;
             int start, end = -1*del.size();
             do {
