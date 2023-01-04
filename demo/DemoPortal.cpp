@@ -132,4 +132,6 @@ vector<string> split(string s, string del = " "){
                 end = s.find(del, start);
                 temp.push_back(s.substr(start, end - start));
             } while (end != -1);
+    
+    return temp;
         }
