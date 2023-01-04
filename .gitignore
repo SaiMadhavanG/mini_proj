@@ -1,0 +1,4 @@
+*.o
+*.out
+PlatformToPortal.txt
+PortalToPlatform.txt

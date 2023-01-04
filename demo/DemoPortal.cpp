@@ -17,7 +17,7 @@ void DemoPortal::processUserCommand(string command)
 {
     string requestID = "Request_" + portal_id.substr(7) + '_' + to_string(req_no++);
     ofstream outfile;
-    outfile.open("PortaltoPlatform.txt", ios::app);
+    outfile.open("PortalToPlatform.txt", ios::app);
     vector<string> totalcommand;
     string word;
     string seller;

@@ -16,4 +16,4 @@ Product.o: ./demo/Product.cpp ./demo/Product.h
 
 
 clean:
-	rm *.o test
+	rm *.o
