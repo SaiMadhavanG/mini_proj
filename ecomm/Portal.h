@@ -1,7 +1,7 @@
 #ifndef PORTAL_H
 #define PORTAL_H
 #include <string>
-#include "Product.h"
+#include "../demo/Product.h"
 #include <vector>
 
 using namespace std;

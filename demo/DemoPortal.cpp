@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include "Portal.h"
 #include "DemoPortal.h"
 #include "Product.h"
 #include "Comparator.h"
@@ -104,7 +103,7 @@ void DemoPortal::checkResponse()
                 }
                 else
                 {
-                    while (nextval != poratl_id)
+                    while (nextval != portal_id)
                     {
                         productname = nextval;
                         Fileio >> productid;
@@ -116,17 +115,16 @@ void DemoPortal::checkResponse()
                         Fileio >> nextval;
                     }
 
-                    vector<Product> sorted_products;
                     if (nature == "Name")
                     {
-                        sorted_products = sort(product_list.begin(), product_list.end(), Comparator::SortByName);
+                        sort(product_list.begin(), product_list.end(), Comparator::SortByName);
                     }
                     else if (nature == "Price")
                     {
-                        sorted_products = sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
+                        sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
                     }
 
-                    for (Product a : sorted_products)
+                    for (Product a : product_list)
                     {
                         cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity();
                     }

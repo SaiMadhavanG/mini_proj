@@ -20,8 +20,9 @@ public class shashanklalSeller extends ecomm.Seller//Here shashankSeller is the 
     public String getID() {
         return myID;
     }
-    //Initialise the member platform for the respective seller object
-    public void addPlatform(Platform platform) {
+    //Initialise the member platform for the respective seller object and addseller to the platform
+    public void addPlatform(Platform platform)
+    {
         this.platform = platform;
     }
 //This function will return an arraylist of products which are of the desired category

@@ -1,6 +1,6 @@
 #ifndef DEMO_PORTAL_H
 #define DEMO_PORTAL_H
-#include "Portal.h"
+#include "../ecomm/Portal.h"
 #include <string>
 #include <iostream>
 #include <fstream>
