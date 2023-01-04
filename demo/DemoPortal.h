@@ -14,7 +14,7 @@ public:
     DemoPortal(string);
     void processUserCommand(string command);
     void checkResponse();
-    static int req_no;
+    int req_no;
 
 private:
     ifstream Fileio;
