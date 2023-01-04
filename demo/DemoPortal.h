@@ -15,6 +15,7 @@ public:
     void processUserCommand(string command);
     void checkResponse();
     int req_no;
+    vector<string> DemoPortal::split(string, string del = " ");
 
 private:
     ifstream Fileio;
