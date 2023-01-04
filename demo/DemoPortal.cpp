@@ -94,8 +94,6 @@ void DemoPortal::checkResponse()
         }else if(nature=="Buy"){
             cout<<"Here is result of your Transactions"<<endl;
             cout<<responses[2];
-        }else if(nature=="List"){
-
         }else{
             parameter=nature;
             while(portalidcheck==portal_id){
