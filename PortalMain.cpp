@@ -22,7 +22,7 @@ int main()
         getline(cin, command_line);
         stringstream c(command_line);
         getline(c, command, ' ');
-        if (command == "Start" || command == "List" || command == "Buy" || command == "check")
+        if (command == "Start" || command == "List" || command == "Buy" || command == "Check")
         {
             portal->processUserCommand(command_line);
         }

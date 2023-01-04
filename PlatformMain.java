@@ -20,11 +20,10 @@ public class PlatformMain {
 		// team members.
 
 		String listOfCommands = "Please use one of the following commands:-"
-				+ "\n • Check - Processes all the commands on the PortalToPlatform.txt"
-				+ "\n • Help - Lists out the list of commands"
-				+ "\n • Quit - Exits the program\n\n";
+				+ "\n * Check - Processes all the commands on the PortalToPlatform.txt"
+				+ "\n * Help - Lists out the list of commands"
+				+ "\n * Quit - Exits the program\n";
 		System.out.println("Welcome to your ecommerce platform!");
-		System.out.println(listOfCommands);
 
 		Seller s1 = new SamEnterprises("SamSeller");
 		s1.addPlatform(pf);
@@ -34,10 +33,11 @@ public class PlatformMain {
 		s1.addPlatform(pf);
 		pf.addSeller(s2);
 
-		Seller s3 = new SMGSeller("SMGSeller");
-		s1.addPlatform(pf);
-		pf.addSeller(s3);
+		// Seller s3 = new SMGSeller("SMGSeller");
+		// s1.addPlatform(pf);
+		// pf.addSeller(s3);
 
+		System.out.println(listOfCommands);
 		Scanner sc = new Scanner(System.in);
 
 		// keep reading from System.in

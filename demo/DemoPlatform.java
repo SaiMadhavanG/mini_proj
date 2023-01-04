@@ -2,7 +2,7 @@ package demo;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.nio.file.NoSuchFileException;
+import java.util.NoSuchElementException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,9 +83,9 @@ public class DemoPlatform extends Platform {
 
 					Seller temp = sellerMap.get(SellerIdentity);
 					temp.buyProduct(itemToBuy, quantity);
-					fw.flush();
 				}
-			} catch (NoSuchFileException e) {
+				fw.flush();
+			} catch (NoSuchElementException e) {
 				break;
 			} catch (Exception e) {
 				System.out.println(e);

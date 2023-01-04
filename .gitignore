@@ -2,3 +2,4 @@
 *.out
 PlatformToPortal.txt
 PortalToPlatform.txt
+*.class
