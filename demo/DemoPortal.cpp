@@ -7,10 +7,10 @@ using namespace std;
 
 DemoPortal::DemoPortal(string portal_id)
 {
-
-    Fileio.open("PlatformToPortal.txt");
+    line = 0;
     this->portal_id = portal_id;
     req_no = 1;
+    list_in_process = false;
 }
 
 void DemoPortal::processUserCommand(string command)
@@ -51,7 +51,7 @@ void DemoPortal::processUserCommand(string command)
     {
         outfile << portal_id << " " << requestID << " "
                 << "Buy"
-                << " " << seller << "-" << totalcommand[1] << " " << totalcommand[2] << endl;
+                << " " << totalcommand[1] << " " << totalcommand[2] << endl;
         request_map[requestID] = "Buy";
     }
     else if (totalcommand[0] == "Check")
@@ -62,94 +62,115 @@ void DemoPortal::processUserCommand(string command)
 }
 void DemoPortal::checkResponse()
 {
-
-    string response;
-    vector<string> responses;
-    string portalidcheck;
-    string requestidcheck;
-    string nature;
-    string nextval;
-    vector<Product> product_list;
-    string productname;
-    string productid;
-    string parameter;
-    int price;
-    int quantity;
-
-    if (Fileio.is_open())
+    ifstream fi("PlatformToPortal.txt");
+    string r, prev = "";
+    for (int i = 0; i < line; i++)
     {
-        getline(Fileio, response);
-        if (response != "")
+        getline(fi, r);
+    }
+    while (true)
+    {
+        getline(fi, r);
+        if (r == prev || r == "")
         {
-            responses = split(response, " ");
-
-            portalidcheck = responses[0];
-            requestidcheck = responses[1];
-            nextval = responses[2];
-            nature = request_map[requestidcheck];
-            if (nature == "Start")
+            if (list_in_process)
             {
-                cout << "Here are the products we offer right now" << endl;
-                for (int i = 2; i < responses.size(); i++)
-                {
-                    cout << responses[i];
-                }
-                cout << endl;
+                list_in_process = false;
+                processListing();
+                line++;
             }
-            else if (nature == "Buy")
+            break;
+        }
+        line++;
+        vector<string> responses = split(r);
+        string pid = responses[0];
+        string rid = responses[1];
+        if (pid != portal_id)
+            continue;
+        if (list_in_process)
+        {
+            if (rid == list_rid)
             {
-                cout << "Here is result of your Transactions" << endl;
-                cout << responses[2];
+                listing.push_back(r);
+                continue;
             }
             else
             {
-            parameter=nature;
-            while(portalidcheck==portal_id){
-            productname = responses[2];
-            productid=response[3];
-            price=response[3];
-            quantity=response[3];
-            Product temp = *(new Product(productname, productid, price, quantity));
-            product_list.push_back(temp);
+                list_in_process = false;
+                processListing();
             }
-            if (nature == "Name")
+        }
+        string nature = request_map[rid];
+        if (nature == "Start")
+        {
+            cout << "The categories being offered are: -\n";
+            for (int j = 2; j < responses.size(); j++)
             {
-                sort(product_list.begin(), product_list.end(), Comparator::SortByName);
+                cout << "* " << responses[j] << endl;
             }
-                else if (nature == "Price")
-                {
-                sort(product_list.begin(), product_list.end(), Comparator::SortByPrice);
-                }
-
-            cout<<"Here are your products sorted by "<<parameter<<endl;
-                    for (Product a : product_list)
-                    {
-                        cout << a.getName() << " " << a.getProductID() << " " << a.getPrice() << " " << a.getQuantity()<<endl;
-                    }
-
-
         }
+        else if (nature == "Name" || nature == "Price")
+        {
+            list_in_process = true;
+            list_rid = rid;
+            listing.push_back(r);
         }
+        else if (nature == "Buy")
+        {
+            if (responses[2] == "Success")
+            {
+                cout << "Product(s) purchased successfully!" << endl
+                     << endl;
+            }
+            else if (responses[2] == "Failure")
+            {
+                cout << "Sorry, purchase of product failed." << endl
+                     << endl;
+            }
+        }
+        prev = r;
     }
-}
-else
-{
-    cout << "empty response";
+    line--;
 }
 
-}
-}
-
-vector<string> DemoPortal::split(string s, string del)
+vector<string> DemoPortal::split(string s)
 {
     vector<string> temp;
-    int start, end = -1 * del.size();
-    do
+    stringstream ss(s);
+    string word;
+    while (ss >> word)
     {
-        start = end + del.size();
-        end = s.find(del, start);
-        temp.push_back(s.substr(start, end - start));
-    } while (end != -1);
-
+        temp.push_back(word);
+    }
     return temp;
+}
+
+void DemoPortal::processListing()
+{
+    vector<Product> productsList;
+    string rid;
+    for (string s : listing)
+    {
+        vector<string> responses = split(s);
+        rid = responses[1];
+        Product product(responses[2], responses[3], stof(responses[4]), stoi(responses[5]));
+        productsList.push_back(product);
+    }
+    listing.clear();
+    string nature = request_map[rid];
+    if (nature == "Price")
+    {
+        sort(productsList.begin(), productsList.end(), Comparator::SortByPrice);
+    }
+    else if (nature == "Name")
+    {
+        sort(productsList.begin(), productsList.end(), Comparator::SortByName);
+    }
+    cout << "\nHere are the products sorted with respect to " << nature << ": -" << endl;
+    printf("| %20s | %70s | %10s | %10s |\n", "Product ID", "Name", "Price", "Quantity");
+    for (Product product : productsList)
+    {
+        printf("| %20s | %70s | %10s | %10s |\n", product.getProductID().c_str(), product.getName().c_str(), to_string(product.getPrice()).substr(0, to_string(product.getPrice()).size() - 4).c_str(), to_string(product.getQuantity()).c_str());
+    }
+    cout << endl;
 }

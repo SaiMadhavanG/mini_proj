@@ -15,11 +15,16 @@ public:
     void processUserCommand(string command);
     void checkResponse();
     int req_no;
-    vector<string> split(string, string);
+    vector<string> split(string);
+    void processListing();
 
 private:
     ifstream Fileio;
     string portal_id;
     map<string, string> request_map;
+    int line;
+    bool list_in_process;
+    string list_rid;
+    vector<string> listing;
 };
 #endif

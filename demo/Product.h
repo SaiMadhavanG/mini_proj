@@ -12,7 +12,7 @@ private:
 
 public:
     Product();
-    Product(string, string, int, int);
+    Product(string, string, float, int);
     string getName();
     string getProductID();
     float getPrice();
