@@ -1,4 +1,11 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 #include"Comparator.h"
+
 using namespace std;
 bool Comparator::SortByPrice(Product p1,Product p2)
 {
