@@ -1,3 +1,9 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 #ifndef DEMO_PORTAL_H
 #define DEMO_PORTAL_H
 #include "../ecomm/Portal.h"

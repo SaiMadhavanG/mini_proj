@@ -1,21 +1,27 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 #ifndef PRODUCT_H
 #define PRODUCT_H
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-class Product
+class Product//Creating class Product
 {
-private:
-    string Name;
-    string productID;
-    float price;
-    int quantity;
-
-public:
-    Product();
-    Product(string, string, float, int);
-    string getName();
-    string getProductID();
-    float getPrice();
-    int getQuantity();
+    //Datamembers of the class
+    private:
+        string Name;
+        string productID;
+        float price;
+        int quantity;
+    //Member methods
+    public:
+        Product();
+	    string getName();
+	    string getProductID();
+	    float getPrice();
+	    int getQuantity();
 };
 #endif
