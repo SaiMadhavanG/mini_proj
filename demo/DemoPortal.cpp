@@ -11,6 +11,7 @@ DemoPortal::DemoPortal(string portal_id)
     this->portal_id = portal_id;
     req_no = 1;
     list_in_process = false;
+    prev_rid = "";
 }
 
 void DemoPortal::processUserCommand(string command)
@@ -60,17 +61,24 @@ void DemoPortal::processUserCommand(string command)
     }
     outfile.close();
 }
+
+// A function that reads the respones from PlatformToPortal.txt and prints out in the terminal
 void DemoPortal::checkResponse()
 {
     ifstream fi("PlatformToPortal.txt");
     string r, prev = "";
+    // 'line' is a variable that maintains count of how many lines have been already read from the PlatforToPortal.txt file
+    // This loop makees sure we don't read those lines again
     for (int i = 0; i < line; i++)
     {
         getline(fi, r);
     }
+    // This while loop ensures we read until the ean od the file
     while (true)
     {
         getline(fi, r);
+        // Prev holds the previous line
+        // At end of file, the last line starts repeating when getline() is called. So, we terminate the while loop when we start seeing empty strings or repetitions
         if (r == prev || r == "")
         {
             if (list_in_process)
@@ -82,25 +90,38 @@ void DemoPortal::checkResponse()
             break;
         }
         line++;
+        // We split the response string into words for easier processing
         vector<string> responses = split(r);
         string pid = responses[0];
         string rid = responses[1];
+        // We ignore the response if the portalID doesn't match
         if (pid != portal_id)
             continue;
+        // If the previous command was a list command, we enter this block
         if (list_in_process)
         {
+            // If the current line is a response to the same list request, we add it to a vector that contains all the responses to this particular list request
             if (rid == list_rid)
             {
                 listing.push_back(r);
                 continue;
             }
+            // Otherwise, we flip the the 'list_in_process' flag and call the processListing() method
             else
             {
                 list_in_process = false;
                 processListing();
             }
         }
+        // prev_rid holds the value of the previous request ID. If we are seeing the same line again, we skip it
+        if (prev_rid == rid)
+        {
+            continue;
+        }
+        // request_map is a map that contains the type of request corresponding to each requestID
+        // We process a response depending on which type of request it was
         string nature = request_map[rid];
+        // If we get a response for a Start request, we print out the categories
         if (nature == "Start")
         {
             cout << "The categories being offered are: -\n";
@@ -109,12 +130,14 @@ void DemoPortal::checkResponse()
                 cout << "* " << responses[j] << endl;
             }
         }
+        // If we get a response for a List request, we set the list_in_process flag true and add the line to the listing vector
         else if (nature == "Name" || nature == "Price")
         {
             list_in_process = true;
             list_rid = rid;
             listing.push_back(r);
         }
+        // If we get a response for a Buy request, we print out a success or failure message
         else if (nature == "Buy")
         {
             if (responses[2] == "Success")
@@ -129,10 +152,12 @@ void DemoPortal::checkResponse()
             }
         }
         prev = r;
+        prev_rid = rid;
     }
     line--;
 }
 
+// A function to split a string into its corresponding words
 vector<string> DemoPortal::split(string s)
 {
     vector<string> temp;
@@ -145,10 +170,12 @@ vector<string> DemoPortal::split(string s)
     return temp;
 }
 
+// A function that processes, sorts and prints the responses in listing vector at the end of a list response
 void DemoPortal::processListing()
 {
     vector<Product> productsList;
     string rid;
+    // We create Product objects and add them to the productsList vector
     for (string s : listing)
     {
         vector<string> responses = split(s);
@@ -158,6 +185,7 @@ void DemoPortal::processListing()
     }
     listing.clear();
     string nature = request_map[rid];
+    // We sort the list with the help of a comparator
     if (nature == "Price")
     {
         sort(productsList.begin(), productsList.end(), Comparator::SortByPrice);
@@ -166,6 +194,7 @@ void DemoPortal::processListing()
     {
         sort(productsList.begin(), productsList.end(), Comparator::SortByName);
     }
+    // Printing  each of the elelments of the vector to the terminal
     cout << "\nHere are the products sorted with respect to " << nature << ": -" << endl;
     printf("| %20s | %70s | %10s | %10s |\n", "Product ID", "Name", "Price", "Quantity");
     for (Product product : productsList)

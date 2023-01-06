@@ -26,5 +26,6 @@ private:
     bool list_in_process;
     string list_rid;
     vector<string> listing;
+    string prev_rid;
 };
 #endif
