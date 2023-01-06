@@ -8,7 +8,7 @@ Product::Product()
     price = 0;
     quantity = 0;
 }
-Product::Product(string name, string productid, int pri, int q)
+Product::Product(string name, string productid, float pri, int q)
 {
     Name = name;
     productID = productid;

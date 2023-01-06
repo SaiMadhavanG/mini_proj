@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch PlatformMain",
+            "request": "launch",
+            "mainClass": "PlatformMain",
+            "projectName": "mini_proj_63750832"
+        },
+        {
+            "type": "java",
+            "name": "Launch PortalMain",
+            "request": "launch",
+            "mainClass": "PortalMain",
+            "projectName": "mini_proj_63750832"
+        },
+        {
+            "type": "java",
+            "name": "Launch DemoPortal",
+            "request": "launch",
+            "mainClass": "demo.DemoPortal",
+            "projectName": "mini_proj_63750832"
+        },
+        {
+            "type": "java",
+            "name": "Launch SMGSeller",
+            "request": "launch",
+            "mainClass": "demo.saimadhavang.SMGSeller",
+            "projectName": "mini_proj_63750832"
+        }
+    ]
+}

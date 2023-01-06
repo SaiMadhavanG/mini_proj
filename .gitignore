@@ -3,3 +3,4 @@
 PlatformToPortal.txt
 PortalToPlatform.txt
 *.class
+.vscode

@@ -33,7 +33,6 @@ public class DemoPlatform extends Platform {
 
 	@Override
 	public boolean addSeller(Seller aSeller) {
-		sellerMap.put(aSeller.getID(), aSeller);
 		sellerList.add(aSeller);
 		return false;
 	}
@@ -65,10 +64,16 @@ public class DemoPlatform extends Platform {
 					if (category.equals("Mobile")) {
 						for (Seller seller : sellerList) {
 							products.addAll(seller.findProducts(Category.Mobile));
+							for (Product product : seller.findProducts(Category.Mobile)) {
+								pidSellerMap.put(product.getProductID(), seller);
+							}
 						}
 					} else if (category.equals("Book")) {
 						for (Seller seller : sellerList) {
 							products.addAll(seller.findProducts(Category.Book));
+							for (Product product : seller.findProducts(Category.Book)) {
+								pidSellerMap.put(product.getProductID(), seller);
+							}
 						}
 					}
 					for (Product product : products) {
@@ -78,13 +83,15 @@ public class DemoPlatform extends Platform {
 								+ "\n");
 					}
 				} else if (requestArray[2].equals("Buy")) {
-					fw.write(portalID + " " + requestID);
+
 					String itemToBuy = requestArray[3];
 					Integer quantity = Integer.parseInt(requestArray[4]);
-					String SellerIdentity = itemToBuy.split("-")[0];
-
-					Seller temp = sellerMap.get(SellerIdentity);
-					temp.buyProduct(itemToBuy, quantity);
+					Seller seller = pidSellerMap.get(itemToBuy);
+					if (seller.buyProduct(itemToBuy, quantity)) {
+						fw.write(portalID + " " + requestID + " Success\n");
+					} else {
+						fw.write(portalID + " " + requestID + " Failure\n");
+					}
 				}
 				fw.flush();
 			} catch (NoSuchElementException e) {
@@ -100,7 +107,7 @@ public class DemoPlatform extends Platform {
 	private FileReader fr;
 	private FileWriter fw;
 	private Scanner sc;
-	private HashMap<String, Seller> sellerMap = new HashMap<>();
 	private ArrayList<Seller> sellerList = new ArrayList<>();
+	private HashMap<String, Seller> pidSellerMap = new HashMap<>();
 
 }

@@ -38,6 +38,7 @@ int main()
         {
             cout << "Please enter a valid command!\nType \"Help\" to get a list of commands\n";
         }
+        cout << endl;
     }
 
     return 0;

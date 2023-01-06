@@ -30,11 +30,11 @@ public class PlatformMain {
 		pf.addSeller(s1);
 
 		Seller s2 = new shashanklalSeller("ShashankSeller");
-		s1.addPlatform(pf);
+		s2.addPlatform(pf);
 		pf.addSeller(s2);
 
 		Seller s3 = new SMGSeller("SMGSeller");
-		s1.addPlatform(pf);
+		s3.addPlatform(pf);
 		pf.addSeller(s3);
 
 		System.out.println(listOfCommands);
