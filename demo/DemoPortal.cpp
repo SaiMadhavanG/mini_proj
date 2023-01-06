@@ -1,3 +1,9 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 #include <bits/stdc++.h>
 #include "DemoPortal.h"
 #include "Product.h"
@@ -43,7 +49,11 @@ void DemoPortal::processUserCommand(string command)
     }
     else if (totalcommand[0] == "List")
     {
-        if (categories.find(totalcommand[1]) == categories.end())
+        if (totalcommand.size() != 3)
+        {
+            cout << "Invalid List command. Type 'Help' for list of commands" << endl;
+        }
+        else if (categories.find(totalcommand[1]) == categories.end())
         {
             cout << "Invalid Category name, type 'Start' to get a list of categories" << endl;
         }
@@ -61,7 +71,11 @@ void DemoPortal::processUserCommand(string command)
     }
     else if (totalcommand[0] == "Buy")
     {
-        if (productset.find(totalcommand[1]) == productset.end())
+        if (totalcommand.size() != 3)
+        {
+            cout << "Invalid Buy command. Type 'Help' for list of commands" << endl;
+        }
+        else if (productset.find(totalcommand[1]) == productset.end())
         {
             cout << "Invalid product ID, type 'List <CategoryName> <SortOrder>' to get a sorted list of products belonging to that category" << endl;
         }
@@ -203,7 +217,15 @@ void DemoPortal::processListing()
     {
         vector<string> responses = split(s);
         rid = responses[1];
-        Product product(responses[2], responses[3], stof(responses[4]), stoi(responses[5]));
+        int quantity = stoi(responses[responses.size() - 1]);
+        float price = stof(responses[responses.size() - 2]);
+        string productId = responses[responses.size() - 3];
+        string name;
+        for (int i = 2; i < responses.size() - 3; i++)
+        {
+            name += responses[i] + " ";
+        }
+        Product product(name, productId, price, quantity);
         productsList.push_back(product);
         productset.insert(responses[3]);
     }
