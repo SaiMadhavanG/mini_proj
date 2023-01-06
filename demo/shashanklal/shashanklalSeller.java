@@ -99,8 +99,8 @@ public class shashanklalSeller extends ecomm.Seller// Here shashankSeller is the
     private String[] nameofmobiles = { "Tony", "Ramsung", "Pineapple", "Tivo", "Joppo", "PlusPlus", "Mixel", "Thor" };
     // List of all the book names from which name of that particular book will be
     // given randomly
-    private String[] nameofbooks = { "Aroundtheworld", "MerchantOfVenice", "War and Peace", "Ikigai", "Invisible Man",
-            "Time Travel", "Macbeth", "TheAlchemist", "WillyWonka", "Sapiens" };
+    private String[] nameofbooks = { "Around_the_world", "Merchant_Of_Venice", "War_and_Peace", "Ikigai", "Invisible_Man",
+            "Time_Travel", "Macbeth", "The_Alchemist", "Willy_Wonka", "Sapiens","Aryan_Invasion_Theory","The_Fish_Of_Bengal"};
     private String myID;// Seller Id
     private ArrayList<Product> products = new ArrayList<Product>();// Will contain list of products
     private Random random = new Random();// Object of random class

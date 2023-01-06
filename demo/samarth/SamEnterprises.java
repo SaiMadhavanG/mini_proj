@@ -67,15 +67,14 @@ public class SamEnterprises extends Seller// class SamEnterprises is the child c
         // Generating random name,quantity and price for the particular book
         Random rand = new Random();
         ArrayList<String> cool_names = new ArrayList<>(
-                List.of(new String[] { "Delhiwale daru le jayenge", "Sai the eminant because", "We Need A savior",
-                        "Kindler 6",
-                        "Redemption 7", "Sherman 4", "Sherman 14", "Lynx 17", "Kanishnokov AK47" }));
+                List.of(new String[] { "Delhiwale_daru_le_jayenge", "Sai_the_eminant_because", "We_Need_A_savior",
+                        "Kindler_6"}));
         for (Integer i = 0; i < cool_names.size(); i++) {
-            Integer Quantity = rand.nextInt(5);
+            Integer Quantity = rand.nextInt(5,25);
             Integer Price = rand.nextInt(200, 1000);
             // !check if this i works
             // Creating an object of the Book class and adding it to the inventory
-            Book book = new Book(Globals.Category.Book, cool_names.get(i), "SamEntrprises-Book." + i.toString(), Price,
+            Book book = new Book(Globals.Category.Book, cool_names.get(i), "SamEntr-B-" + i.toString(), Price,
                     Quantity);
             inventory.addBook(book);
         }
@@ -86,15 +85,15 @@ public class SamEnterprises extends Seller// class SamEnterprises is the child c
         // Generating random name,quantity and price for the particular book
         Random rand = new Random();
         ArrayList<String> cool_names = new ArrayList<>(
-                List.of(new String[] { "Syphon 7", "Syphon 9", "Kindler 5", "Kindler 6",
-                        "Redemption 7", "Sherman 4", "Sherman 14", "Lynx 17", "Kanishnokov AK47" }));
+                List.of(new String[] { "Syphon_7", "Syphon_9", "Kindler_5", "Kindler_6",
+                        "Redemption_7", "Sherman_4", "Sherman_14", "Lynx_17", "Kanishnokov_AK47" }));
         for (Integer i = 0; i < cool_names.size(); i++) {
-            Integer Quantity = rand.nextInt(5);
+            Integer Quantity = rand.nextInt(5,25);
             Integer Price = rand.nextInt(20000, 50000);
 
             // !Check if this i works latter.
             // Creating an object of the Mobile class and adding it to the inventory
-            Mobile mob = new Mobile(Globals.Category.Mobile, cool_names.get(i), "SamEntrprises-Mobile." + i, Price,
+            Mobile mob = new Mobile(Globals.Category.Mobile, cool_names.get(i), "SamEntrp-M-" + i, Price,
                     Quantity);
             inventory.addMobile(mob);
         }
@@ -119,19 +118,19 @@ public class SamEnterprises extends Seller// class SamEnterprises is the child c
     // quantity
     // Otherwise it returns flase
     public boolean buyProduct(String productID, int quantity) {
-        String[] components = productID.split(".");
-        if (components[1].equals("Mobile")) {
+        String[] components = productID.split("-");
+        if (components[1].equals("M")) {
             Integer hashmob = Integer.parseInt(components[2]);
             Mobile temp = (Mobile) inventory.mobiles.get(hashmob);
-            if (temp.getQuantity() > quantity) {
+            if (temp.getQuantity() >= quantity) {
                 temp.reduceQuantity(quantity);
                 return true;
 
             }
-        } else if (components[1].equals("Book")) {
+        } else if (components[1].equals("B")) {
             Integer hashmob = Integer.parseInt(components[2]);
             Book temp = (Book) inventory.books.get(hashmob);
-            if (temp.getQuantity() > quantity) {
+            if (temp.getQuantity() >= quantity) {
                 temp.reduceQuantity(quantity);
                 return true;
             }
