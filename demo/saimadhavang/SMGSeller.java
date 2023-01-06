@@ -1,5 +1,10 @@
 package demo.saimadhavang;
-
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 import ecomm.Seller;
 import ecomm.Globals.Category;
 import ecomm.Globals;
