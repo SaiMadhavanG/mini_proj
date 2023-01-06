@@ -49,7 +49,7 @@ public class shashanklalSeller extends ecomm.Seller// Here shashankSeller is the
     public boolean buyProduct(String productID, int quantity) {
 
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductID() == productID) {
+            if (products.get(i).getProductID().equals(productID)) {
                 if (products.get(i).getQuantity() >= quantity) {
                     if (products.get(i).getCategory() == Category.Mobile) {
                         Mobile mb = (Mobile) products.get(i);
