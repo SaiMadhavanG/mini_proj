@@ -71,7 +71,6 @@ public class SMGSeller extends Seller// SMGSeller is the child of Seller class
             numOfProducts = random.nextInt(12);
         }
         Set<String> nameSet = new HashSet<String>();
-        System.out.println("Num of products: " + numOfProducts);
         for (int i = 0; i < numOfProducts; i++) {
             String productID = sellerID + "-" + Integer.toString(1000 + i);
             if (i % 2 == 1) {

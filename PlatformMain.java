@@ -25,13 +25,13 @@ public class PlatformMain {
 				+ "\n * Quit - Exits the program\n";
 		System.out.println("Welcome to your ecommerce platform!");
 
-		// Seller s1 = new SamEnterprises("SamSeller");
-		// s1.addPlatform(pf);
-		// pf.addSeller(s1);
+		Seller s1 = new SamEnterprises("SamSeller");
+		s1.addPlatform(pf);
+		pf.addSeller(s1);
 
-		// Seller s2 = new shashanklalSeller("ShashankSeller");
-		// s2.addPlatform(pf);
-		// pf.addSeller(s2);
+		Seller s2 = new shashanklalSeller("ShashankSeller");
+		s2.addPlatform(pf);
+		pf.addSeller(s2);
 
 		Seller s3 = new SMGSeller("SMGSeller");
 		s3.addPlatform(pf);

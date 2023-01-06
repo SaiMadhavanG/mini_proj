@@ -43,17 +43,39 @@ void DemoPortal::processUserCommand(string command)
     }
     else if (totalcommand[0] == "List")
     {
-        outfile << portal_id << " " << requestID << " "
-                << "List"
-                << " " << totalcommand[1] << endl;
-        request_map[requestID] = totalcommand[2];
+        if (categories.find(totalcommand[1]) == categories.end())
+        {
+            cout << "Invalid Category name, type 'Start' to get a list of categories" << endl;
+        }
+        else if (totalcommand[2] != "Name" && totalcommand[2] != "Price")
+        {
+            cout << "Invalid Sort Order, Sorting can be done according to 'Name' or 'Price'" << endl;
+        }
+        else
+        {
+            outfile << portal_id << " " << requestID << " "
+                    << "List"
+                    << " " << totalcommand[1] << endl;
+            request_map[requestID] = totalcommand[2];
+        }
     }
     else if (totalcommand[0] == "Buy")
     {
-        outfile << portal_id << " " << requestID << " "
-                << "Buy"
-                << " " << totalcommand[1] << " " << totalcommand[2] << endl;
-        request_map[requestID] = "Buy";
+        if (productset.find(totalcommand[1]) == productset.end())
+        {
+            cout << "Invalid product ID, type 'List <CategoryName> <SortOrder>' to get a sorted list of products belonging to that category" << endl;
+        }
+        else if (stoi(totalcommand[2]) < 1)
+        {
+            cout << "Quantity must be greater than 0" << endl;
+        }
+        else
+        {
+            outfile << portal_id << " " << requestID << " "
+                    << "Buy"
+                    << " " << totalcommand[1] << " " << totalcommand[2] << endl;
+            request_map[requestID] = "Buy";
+        }
     }
     else if (totalcommand[0] == "Check")
     {
@@ -128,6 +150,7 @@ void DemoPortal::checkResponse()
             for (int j = 2; j < responses.size(); j++)
             {
                 cout << "* " << responses[j] << endl;
+                categories.insert(responses[j]);
             }
         }
         // If we get a response for a List request, we set the list_in_process flag true and add the line to the listing vector
@@ -182,6 +205,7 @@ void DemoPortal::processListing()
         rid = responses[1];
         Product product(responses[2], responses[3], stof(responses[4]), stoi(responses[5]));
         productsList.push_back(product);
+        productset.insert(responses[3]);
     }
     listing.clear();
     string nature = request_map[rid];

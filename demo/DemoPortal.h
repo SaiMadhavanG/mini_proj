@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <set>
 using namespace std;
 
 class DemoPortal : public Portal
@@ -27,5 +28,7 @@ private:
     string list_rid;
     vector<string> listing;
     string prev_rid;
+    set<string> categories;
+    set<string> productset;
 };
 #endif
