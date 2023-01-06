@@ -1,4 +1,10 @@
 package demo;
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 //Importing the globals and product pacakges
 import ecomm.Globals;
 import ecomm.Product;

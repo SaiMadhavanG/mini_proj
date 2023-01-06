@@ -1,4 +1,6 @@
+
 #include"Comparator.h"
+
 using namespace std;
 bool Comparator::SortByPrice(Product p1,Product p2)
 {
