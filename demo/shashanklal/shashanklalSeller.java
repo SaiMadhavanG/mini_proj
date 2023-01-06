@@ -1,5 +1,10 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 package demo.shashanklal;
-
 import ecomm.Platform;
 import ecomm.Product;
 import ecomm.Globals;
@@ -76,7 +81,7 @@ public class shashanklalSeller extends ecomm.Seller// Here shashankSeller is the
                 int quantity = random.nextInt(1, 100);
                 float price = random.nextInt(2, 6) * 10000.0f;
                 String name = nameofmobiles[random.nextInt(8)];
-                String productID = "shashanklal_" + Integer.toString(i + 1000);
+                String productID = "shashanklal-" + Integer.toString(i + 1000);
                 Mobile mb = new Mobile(Category.Mobile, name, productID, price, quantity);// Creating an object of the
                                                                                           // Mobile class
                 products.add(mb);// Adding that mobile to our list of products
@@ -85,7 +90,7 @@ public class shashanklalSeller extends ecomm.Seller// Here shashankSeller is the
                 int quantity = random.nextInt(1, 100);
                 float price = random.nextInt(2, 9) * 100.0f;
                 String name = nameofbooks[random.nextInt(10)];
-                String productID = "shashanklal_" + Integer.toString(i + 1000);
+                String productID = "shashanklal-" + Integer.toString(i + 1000);
                 Book b = new Book(Category.Book, name, productID, price, quantity);// Creating an object of the book
                                                                                    // class
                 products.add(b);// Adding that book to our list of products
