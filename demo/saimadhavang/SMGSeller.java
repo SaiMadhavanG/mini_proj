@@ -1,5 +1,10 @@
+/*
+    Mini-Project done by:
+    Samarjeet Wankhade(IMT2021013)
+    Sai Madhavan G(IMT2021101)
+    Shashank Lal(IMT2021538)
+*/
 package demo.saimadhavang;
-
 import ecomm.Seller;
 import ecomm.Globals.Category;
 import ecomm.Globals;
@@ -8,14 +13,11 @@ import ecomm.Product;
 import java.time.*;
 import java.util.Random;
 import java.util.Set;
-
 import demo.Book;
 import demo.Mobile;
-
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class SMGSeller extends Seller// SMGSeller is the child of Seller class
 {
     public SMGSeller(String ID)// Constructor for SMGSeller
@@ -138,14 +140,6 @@ public class SMGSeller extends Seller// SMGSeller is the child of Seller class
         }
 
     }
-
-    public static void main(String[] args) {
-        SMGSeller smg = new SMGSeller("123");
-        for (Product p : smg.productsList) {
-            System.out.println(p.getName());
-        }
-    }
-
     private Random random = new Random();
     private Platform platform;
     private ArrayList<Product> productsList = new ArrayList<>();
