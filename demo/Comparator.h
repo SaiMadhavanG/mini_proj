@@ -1,4 +1,4 @@
-//IMT2021538
+
 #ifndef COMPARATOR_H
 #define COMPARATOR_H
 #include<bits/stdc++.h>
